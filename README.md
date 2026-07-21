@@ -26,3 +26,4 @@ npx skills add iamken1204/skills --skill minimal-impl --yes
 - `minimal-impl` — ship the shortest working implementation.
 - `nomen` — create names with multiple meaningful layers.
 - `orchestrate` — split architecture and verification from delegated implementation.
+- `unsaid` — write strategic-ambiguity copy: definite sentences, referents left unsaid.
