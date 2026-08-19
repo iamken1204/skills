@@ -27,6 +27,7 @@ npx skills add iamken1204/skills --skill minimal-impl --yes
 - `minimal-impl` — ship the shortest working implementation.
 - `nomen` — create names with multiple meaningful layers.
 - `orchestrate` — split architecture and verification from delegated implementation.
+- `probing` — explain how code works, recover why it exists, and critique its architecture.
 - `review-risk` — audit a diff for bugs, breaking changes, and security vulnerabilities.
 - `review-shape` — audit a diff for maintainability: code judo, sprawl, layering leaks.
 - `rigor-impl` — plan, implement, and verify changes with task-specific engineering playbooks.
