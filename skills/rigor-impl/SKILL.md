@@ -25,7 +25,7 @@ rigor-impl runs on any agent harness. Every playbook and reference uses this voc
 
 Remaining triggers:
 
-- Nontrivial change, architecture decision, or "are we sure?" → `references/how.md`.
+- Before a nontrivial change or architecture decision → `references/how.md`.
 - About to ask the user a "which approach", "how should I", or "what should this do" fork → classify it first. If the answer is a fact you could observe by running something (behavior, timing, layout, output, perf), it is not the human's to answer: sketch it via the Prototype playbook and let the result decide. Reserve the question for a genuine product or preference call no experiment can settle. The ask is the slow path; a throwaway probe answers faster and hands the human a result to react to instead of a decision to make.
 - Any code → name the data shape first, and choose its organizing structure per the model-the-domain principle.
 - Code crossing a function boundary → `references/architect.md`: parallel design exploration before implementing.
@@ -120,7 +120,6 @@ Your first todolist actions are the matched playbook's steps, copied in verbatim
 
 A large or cross-cutting effort, or work the user steps away from to trust later, routes to `references/figure-it-out.md` even when a narrower playbook fits. Use it whenever no bundled playbook fits: it designs a bespoke, rigorous playbook for the task.
 
-- **Investigation.** Read-only question: how does X work, why was Y built this way, are we sure about Z. `playbooks/investigation.md`.
 - **Bug fix.** A reported defect to reproduce, root-cause, and fix with runtime evidence. `playbooks/bug-fix.md`.
 - **Perf issue.** A measured slowness to trace and improve against a baseline. `playbooks/perf-issue.md`.
 - **Hillclimb.** Sustained, scientific improvement of one metric against a target: loop hypotheses with before/after measurement and one commit per accepted win. Distinct from Perf issue, which is a one-off fix. `playbooks/hillclimb.md`.
