@@ -31,5 +31,6 @@ npx skills add iamken1204/skills --skill minimal-impl --yes
 - `review-risk` — audit a diff for bugs, breaking changes, and security vulnerabilities.
 - `review-shape` — audit a diff for maintainability: code judo, sprawl, layering leaks.
 - `rigor-impl` — plan, implement, and verify changes with task-specific engineering playbooks.
+- `tw-speak` — write Taiwanese Mandarin that reads human: two-character verbs, named subjects, idioms and 文白夾雜, Taiwan vocabulary.
 - `unsaid` — write strategic-ambiguity copy: definite sentences, referents left unsaid.
 - `unslop` — cure AI-sounding prose: answer first, plain verbs, no hype, no bullet walls.
