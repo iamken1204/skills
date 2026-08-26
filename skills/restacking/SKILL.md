@@ -35,7 +35,7 @@ Write the proposed stack before committing. Each entry names its scope, purpose,
 
 ## Write every commit
 
-Load the `unslop` skill before drafting commit messages.
+Write each message like a direct note to a reviewer. Lead with the point, use active voice and concrete verbs, and keep one claim per sentence. Cut throat-clearing, hype, hedging, filler, and closing summaries. Read the result aloud; rewrite anything a maintainer would not say to a colleague.
 
 Use this title shape:
 
@@ -62,7 +62,7 @@ After the last commit:
 
 1. Compare `HEAD^{tree}` with the recorded final tree hash. A mismatch means the rebuild changed the latest state; stop and account for the difference.
 2. Inspect the base-to-HEAD diff and working tree. Every intended change must be committed exactly once, while excluded local files remain untouched.
-3. Read the rebuilt log in full format. Every commit needs an actual scope, a specific title, and a non-empty body written under `unslop`.
+3. Read the rebuilt log in full format. Every commit needs an actual scope, a specific title, and a non-empty body that follows the writing rules above.
 4. Run the relevant final checks for the combined tree.
 
 Report the base and original HEAD, list the rebuilt commits in order, name the checks run, and state that nothing was pushed.
