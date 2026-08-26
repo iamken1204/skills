@@ -1,68 +1,56 @@
 ---
 name: restacking
-description: "Rebuilds an over-fragmented branch from its latest tree into logically scoped commits with titles and bodies. Use when the user asks to split, regroup, restack, or rewrite all commits, including 「commit 太多」、「拆掉 commits」 or 「重新整理 commits」."
+description: "Rebuilds a branch's history from its latest tree into logically scoped commits with titles and bodies. Use when the user asks to split, regroup, restack, or rewrite all commits, including 「commit 太多」、「拆掉 commits」 or 「重新整理 commits」."
 ---
 
 # Restacking
 
-Treat the latest repository state as the source of truth and the existing commits as raw material. Replace the requested history range with a reviewable sequence while preserving the final tree exactly.
+The latest tree is the source of truth and the existing commits are raw material: replace the requested range with a reviewable sequence that ends at exactly the same tree.
 
 ## Establish the range
 
-1. Inspect the working tree, current branch, upstream, recent graph, and candidate base refs. Read the repository's commit conventions.
+1. Inspect the working tree, current branch, upstream, recent graph, and candidate base refs. Read the repository's commit conventions from CONTRIBUTING, commitlint config, and the recent log.
 2. Resolve the base from the user's target, the PR base, or the merge-base with the remote default branch, in that order. Ask if the choice remains ambiguous; commit count is not evidence of a base.
 3. A direct request to tear down, rebuild, or rewrite the commits authorizes the local history rewrite. A force-push is separate shared-state approval: leave it to the user unless they explicitly request it.
-4. Record the original HEAD SHA and the chosen base SHA before moving HEAD.
 
 ## Freeze the latest state
 
-Review every modified and untracked file. Exclude secrets, local artifacts, and generated files that the repository does not track.
-
-Stage the intended repository state and record its tree with `git write-tree`. This tree hash is the invariant for the rebuild. Reset the branch to the base with a mixed reset so the files stay at their latest contents while the old commits disappear from the branch.
-
-If the request applies only to committed changes, preserve unrelated worktree changes separately and restore them after rebuilding the committed range.
+1. If the request covers only committed changes, `git stash -u` everything else first.
+2. Otherwise review every modified and untracked file, exclude secrets, local artifacts, and untracked generated files, stage the rest, and commit it as a WIP.
+3. `git branch restack-backup`. Its tree is the invariant for the rebuild, and `git reset --hard restack-backup` recovers from any misstep.
+4. `git reset --mixed <base>`. The files keep their latest contents while the old commits leave the branch.
 
 ## Design the stack
 
 Read the complete base-to-final diff, then group it by reason for change:
 
-- One commit carries one coherent behavior or responsibility, including the tests, types, fixtures, and documentation required by that behavior.
+- One commit carries one coherent behavior or responsibility, including the tests, types, fixtures, and documentation it requires.
 - Independent behavior, mechanical refactors, migrations, and generated output get separate commits when each can stand on its own.
 - Shared prerequisites land before their consumers. Every intermediate tree should remain understandable and, where practical, testable.
 - File count does not define granularity. Split a file by hunks when it contains more than one reason for change; keep several files together when they implement one reason.
 
-Write the proposed stack before committing. Each entry names its scope, purpose, owned paths or hunks, and dependency on earlier entries. Start rebuilding once every changed hunk belongs to exactly one entry.
+Show the user the proposed stack and proceed; the request already authorized the rewrite. Each entry names its scope, purpose, owned paths or hunks, and dependency on earlier entries. Start rebuilding once every changed hunk belongs to exactly one entry.
 
 ## Write every commit
 
-Write each message like a direct note to a reviewer. Lead with the point, use active voice and concrete verbs, and keep one claim per sentence. Cut throat-clearing, hype, hedging, filler, and closing summaries. Read the result aloud; rewrite anything a maintainer would not say to a colleague.
+Follow the repository's own title and body format when it has one. Without one, shape titles as `<scope>: <plain-language change>`, where the scope names the product surface, subsystem, or package, such as `api-executions` or `ui-capture`, never a type prefix such as `feat` or `fix`.
 
-Use this title shape:
-
-```text
-<actual-scope>: <plain-language change>
-```
-
-Derive the scope from the product surface, subsystem, package, or owned module, such as `api-executions` or `ui-capture`. Do not use conventional prefixes such as `feat`, `fix`, `chore`, `refactor`, `docs`, or `test`. Match the repository's capitalization and wording after the scope.
-
-Every commit has a non-empty body. State why the change exists and any implementation choice or constraint a reviewer needs; do not repeat the title. Use real paragraph breaks through separate `-m` arguments or a commit-message file, never literal `\n` text.
+The body states why the change exists and any implementation choice or constraint a reviewer needs, without repeating the title; skip it only when a reviewer needs no reason, such as a typo fix. Write as a maintainer would speak to a colleague: lead with the point, active voice and concrete verbs, one claim per sentence, no throat-clearing, hype, hedging, filler, or closing summaries. Use real paragraph breaks through separate `-m` arguments or a message file, never literal `\n` text.
 
 For each stack entry:
 
-1. Stage only its paths or hunks.
-2. Inspect `git diff --cached` and confirm it expresses one reason for change with no borrowed or missing pieces.
+1. Stage only its paths or hunks. For hunks, `git apply --cached` a trimmed patch; `git add -p` needs a terminal.
+2. Confirm `git diff --cached` expresses one reason for change with no borrowed or missing pieces.
 3. Run the narrowest useful check when the commit can be tested independently.
-4. Commit with its scoped title and body.
+4. Commit.
 
 Do not leave fixup, WIP, or message-only cleanup commits in the finished stack.
 
 ## Prove the rebuild
 
-After the last commit:
+1. `git diff restack-backup HEAD` must be empty and `git status` must show only the excluded files. Anything else means the rebuild changed the latest state; stop and account for it.
+2. Read the rebuilt log in full format and check every message against the rules above.
+3. Run the relevant final checks for the combined tree.
+4. `git stash pop` if you stashed.
 
-1. Compare `HEAD^{tree}` with the recorded final tree hash. A mismatch means the rebuild changed the latest state; stop and account for the difference.
-2. Inspect the base-to-HEAD diff and working tree. Every intended change must be committed exactly once, while excluded local files remain untouched.
-3. Read the rebuilt log in full format. Every commit needs an actual scope, a specific title, and a non-empty body that follows the writing rules above.
-4. Run the relevant final checks for the combined tree.
-
-Report the base and original HEAD, list the rebuilt commits in order, name the checks run, and state that nothing was pushed.
+Report the base, the rebuilt commits in order, the checks run, that `restack-backup` still holds the old history, and that nothing was pushed.
