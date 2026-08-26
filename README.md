@@ -23,6 +23,7 @@ npx skills add iamken1204/skills --skill minimal-impl --yes
 
 ## Skills
 
+- `eli30` — catch a grownup up on an unfamiliar topic: narrated walkthrough, then a comic-strip graphic.
 - `fairway` — implement happy-path-first: deep modules, type-driven invariants, evidence-gated complexity.
 - `minimal-impl` — ship the shortest working implementation.
 - `nomen` — create names with multiple meaningful layers.
