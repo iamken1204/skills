@@ -19,7 +19,7 @@ Examples below are TypeScript; the rules are language-neutral (see the note unde
 
 The rules in this skill pull in two directions: types and boundaries add structure, rent and evidence remove it. When they conflict, decide in this order:
 
-1. **Safety first.** Security boundaries, concurrency primitives, and irreversible data operations (deletes, payments, migrations) may be defended without runtime evidence. Everything else needs proof.
+1. **Safety first.** Security boundaries, concurrency primitives, and irreversible data operations (deletes, payments, migrations) may be defended without an observed failure. Elsewhere, use the evidence criteria in Evidence Before Complexity.
 2. **Default to the smallest honest implementation**: a direct function, a Transaction Script, a vertical slice.
 3. **Promote a raw value to a domain type** only when it crosses a trust boundary or carries an invariant more than one place must respect. Inside a small local scope, a well-named variable is enough.
 4. **Extract a module, port, or service** only when it hides real complexity, owns a real invariant, or has more than one real implementation.
@@ -44,13 +44,13 @@ async function update(input: string) {
 }
 ```
 
-DO expose the use case and push mechanics behind deep boundaries:
+DO expose the use case and push mechanics behind deep boundaries, preserving operation order and failure behavior. This example assumes installation can run while the server is active:
 
 ```ts
 async function update(version: Version) {
-  await server.stop()
   await cli.install(version)
   await cli.requireVersion(version)
+  await server.stop()
   await server.start()
 }
 ```
@@ -61,7 +61,7 @@ async function update(version: Version) {
 - return early for a legal no-op: "nothing to do" is a valid outcome
 - assert or throw for a broken invariant: a state that should be impossible must fail loudly, never be silently swallowed
 - let errors reach the existing user-facing boundary unless recovery is an explicit product requirement
-- handle common operational failures clearly; an uncommon case gets code only after concrete runtime evidence
+- handle common operational failures clearly; justify handling uncommon cases with the evidence criteria below, even before they occur in production
 
 DON'T bury the valid path in nested conditionals:
 
@@ -215,9 +215,9 @@ Add the repository later, when data access becomes a real domain port or hides s
 ## Evidence Before Complexity
 
 - prefer one obvious path and one source of truth
-- outside the safety carve-out in Tie-Breakers, do not defend against theoretical edge cases: wait until a runtime, log, test reproduction, persisted state, or user report proves the case exists
-- when evidence arrives, fix the smallest real failure at the boundary that owns it; do not build a general defense system around one incident
-- never justify complexity with "could", "might", or "what if" alone; state the observed failure and its likelihood
+- outside the safety carve-out in Tie-Breakers, require evidence for edge-case handling: explicit requirements, API contracts, failure paths derived from the code, runtime behavior, logs, test reproductions, persisted state, or user reports all count
+- address the supported failure with the smallest fix at the boundary that owns it; do not build a general defense system around one case
+- never justify complexity with "could", "might", or "what if" alone; state the concrete failure condition and supporting evidence
 - when editing existing code, a safeguard you cannot trace to evidence is a question to raise, not a line to silently delete
 - prefer less code, fewer names, fewer branches, and net-negative diffs when behavior permits
 
@@ -229,7 +229,7 @@ const attempts = new Map<ID, number>()
 // added because two calls might theoretically overlap
 ```
 
-DO implement the observed flow directly:
+DO implement the required flow directly. Here, installation requires the server to have exited:
 
 ```ts
 await stopServer(id)
@@ -237,7 +237,7 @@ await installCli(version)
 await startServer(id)
 ```
 
-When a real runtime later reports `Text file busy`, use that evidence to add the smallest owned fix: make `stopServer` await process exit before installation. Do not build a lifecycle framework.
+Make `stopServer` await process exit before installation because the next operation requires it; do not wait for a `Text file busy` report. Keep that guarantee inside `stopServer` rather than building a lifecycle framework.
 
 ## Domain Core, Infrastructure Shell
 
@@ -272,7 +272,7 @@ DO test the stable use-case boundary and observable order:
 
 ```ts
 await controller.update("1.2.3")
-expect(events).toEqual(["stop", "install", "verify", "start"])
+expect(events).toEqual(["install", "verify", "stop", "start"])
 ```
 
 ## Vocabulary
