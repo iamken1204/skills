@@ -23,6 +23,7 @@ npx skills add iamken1204/skills --skill minimal-impl --yes
 
 ## Skills
 
+- `bun-dig` — dig tool specs, prompts, and implementations out of a Bun-compiled CLI binary and diff them across versions.
 - `eli30` — catch a grownup up on an unfamiliar topic: narrated walkthrough, then a comic-strip graphic.
 - `fairway` — implement happy-path-first: deep modules, type-driven invariants, evidence-gated complexity.
 - `minimal-impl` — ship the shortest working implementation.
