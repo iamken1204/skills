@@ -9,7 +9,7 @@ Do not force a test when it would be impractical. If the available test would re
 1. **Understand the bug.** Intended behavior, current behavior, affected path, smallest observable reproduction.
 2. **Choose the narrowest executable check.** Prefer the closest unit, component, integration, or regression test already used for that codepath. No practical path → don't create one from scratch just to satisfy the workflow.
 3. **Write the failing test first.** The smallest focused test that would have caught the bug, encoding intended behavior, not mirroring the implementation.
-4. **Run it before fixing.** Confirm it fails for the intended reason; if it passes or fails for an unrelated reason, correct the test or reproduction first.
+4. **Run it before fixing.** Confirm it fails for the intended reason. If it passes or fails for an unrelated reason, correct the test or reproduction first.
 5. **Fix the bug.** The smallest production change that satisfies the intended behavior while preserving nearby contracts.
 6. **Rerun the regression test.** Confirm it passes.
 7. **Run nearby validation** (adjacent tests, types, lint) when the change has broader risk.
@@ -24,7 +24,7 @@ Prefer no new test over a bad test: one that mostly tests mocks, encodes impleme
 
 - Do not change tests merely to match a wrong implementation.
 - Do not weaken existing assertions unless expected behavior genuinely changed and the reason is clear.
-- Keep the regression test focused on the bug; no broad fixture churn.
+- Keep the regression test focused on the bug. No broad fixture churn.
 - If the bug is flaky, make the test deterministic where possible and document the signal being locked down.
 - If the bug exposes a broader class of failures, land the focused regression first, then consider sibling coverage.
 

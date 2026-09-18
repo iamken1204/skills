@@ -6,7 +6,7 @@ Open a todolist with one entry per phase: Ground, Sketch, Agree, Implement, Scra
 
 ## Phase A: Ground
 
-Build a real mental model of every system the new code touches. Run `references/how.md` over the relevant subsystems, Critique mode if existing structure is the constraint. Naming a file isn't grounding; produce the traced model. If the design redefines ownership or layering, also run `references/why.md` on the existing shape so the rationale becomes a constraint, not a guess. Skip Phase A only for genuinely greenfield work with no surrounding system.
+Build a real mental model of every system the new code touches. Run `references/how.md` over the relevant subsystems, Critique mode if existing structure is the constraint. Naming a file isn't grounding. Produce the traced model. If the design redefines ownership or layering, also run `references/why.md` on the existing shape so the rationale becomes a constraint, not a guess. Skip Phase A only for genuinely greenfield work with no surrounding system.
 
 ## Phase B: Sketch
 
@@ -25,11 +25,11 @@ Screen every candidate against the red flags below before synthesis. Compare via
 
 ## Phase C: Agree (opt-in)
 
-Default: proceed directly to implementation with the synthesized design. Opt in to a human checkpoint only when the invoker explicitly asks ("stop and show me before implementing"). The synthesis can ship as its own commit either way; subsequent commits read as filling in bodies against a stable contract. Planned, scoped breakage during fill-in is fine (the outcome-oriented-execution principle). For adversarial pressure on the design before implementing, run `references/interrogate.md` on the sketch. If the human pushes back on the shape, treat that as Phase A evidence: re-ground and re-run Phase B.
+Default: proceed directly to implementation with the synthesized design. Opt in to a human checkpoint only when the invoker explicitly asks ("stop and show me before implementing"). The synthesis can ship as its own commit either way, as the "scaffold first" mode of the foundational-thinking principle. Planned, scoped breakage during fill-in is fine (the outcome-oriented-execution principle). For adversarial pressure on the design before implementing, run `references/interrogate.md` on the sketch. If the human pushes back on the shape, treat that as Phase A evidence. Re-ground and re-run Phase B.
 
 ## Phase D: Implement against the sketch
 
-Replace `not implemented` bodies with code. The sketch is the contract. Deviations are signal worth surfacing, not friction to absorb silently: if a function needs a parameter the sketch didn't anticipate, ask whether the sketch was wrong, the requirement was missed, or the implementation is overreaching.
+Replace `not implemented` bodies with code. The sketch is the contract. Deviations are signal worth surfacing, not friction to absorb silently. If a function needs a parameter the sketch didn't anticipate, ask whether the sketch was wrong, the requirement was missed, or the implementation is overreaching.
 
 ## Phase E: Scrap when the architecture is wrong
 
@@ -42,8 +42,8 @@ If implementation keeps producing friction the sketch can't absorb, throw the sk
 - Callers having to know the abstraction's internal rules to use it.
 - Two or more independent Phase D deviations of the same shape.
 
-Use judgment: a few edge cases don't condemn an architecture, and complexity in the data is not complexity in the design. When you scrap: re-run `references/how.md` over what's been built so the implementation lessons enter the new design as inputs; redesign as if the new constraints had been day-one assumptions; subtract before adding (the new sketch should be smaller than the old one before it grows); return to Phase B.
+Use judgment. A few edge cases don't condemn an architecture. Complexity in the data is not complexity in the design. When you scrap: re-run `references/how.md` over what's been built, redesign as if the new constraints had been day-one assumptions, subtract before adding (the new sketch should be smaller than the old one before it grows), and return to Phase B.
 
 ## Outputs
 
-The caller's usage first, the type sketch derived from it. One file with new types and signatures for small changes; module map plus type definitions for larger work. The rationale ships alongside, including the usage sketch and the synthesis decision.
+The caller's usage first, the type sketch derived from it. One file with new types and signatures for small changes. Module map plus type definitions for larger work. The rationale ships alongside, including the usage sketch and the synthesis decision.

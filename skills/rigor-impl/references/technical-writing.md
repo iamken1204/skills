@@ -8,22 +8,22 @@ Three rules sit above the layers:
 - **Use the short, everyday word.** "Use", not "utilize". A long word has to buy its length with precision.
 - **When a rule makes a sentence worse, fix the sentence another way or leave it alone.** The rules serve the reader.
 
-The codebase is the word list: write the real symbol, file, flag, or command name, not a synonym. Don't invent jargon; use the words a developer would say out loud ("move", "delete", "a budget that only decreases"). A named pattern is fine when the doc says what it means the first time.
+The codebase is the word list. Write the real symbol, file, flag, or command name, not a synonym. Don't invent jargon. Use the words a developer would say out loud ("move", "delete", "a budget that only decreases"). A named pattern is fine when the doc says what it means the first time. Propose a new offender and its replacement as an addition to rule 26 of `references/unslop.md` in your reply, with the diff. Don't edit that file mid-task.
 
 ## Vary the rhythm
 
-A doc can obey every rule and still read machine-written. Mix sentence lengths on purpose: short sentences land a point; longer ones carry a fact with its condition. One thought per sentence does not mean one length per sentence. Have a view where the mode allows it (explanation weighs trade-offs; reference stays dry). Be specific over sterile: not "schema changes can cause issues" but "a column rename fails the build".
+A doc can obey every rule and still read machine-written. Mix sentence lengths on purpose. Short sentences land a point. Longer ones carry a fact with its condition. One thought per sentence does not mean one length per sentence. Have a view where the mode allows it (explanation weighs trade-offs, reference stays dry). Be specific over sterile. Not "schema changes can cause issues" but "a column rename fails the build".
 
 ## Pick the mode first (Diátaxis)
 
 One document, one mode. Two questions pick it: action or understanding, learning or work.
 
-- **Tutorial** (action + learning). You are the teacher; the learner's success is your job. Open with what they will build. Every step produces a visible result, and you tell them what they should see. Cut explanation to one clause and a link. Write as "we", in commands.
+- **Tutorial** (action + learning). You are the teacher. The learner's success is your job. Open with what they will build. Every step produces a visible result, and you tell them what they should see. Cut explanation to one clause and a link. Write as "we", in commands.
 - **How-to** (action + work). Solve a problem a person has. Assume competence, skip teaching, action only. Allow forks: "If you want x, do y." Name it by the task: "How to calibrate the radar array".
-- **Reference** (understanding + work). Describe, only describe. Dry, complete, sure; no instruction, no opinion. Mirror the structure of the thing described. Generate from code where possible.
-- **Explanation** (understanding + learning). One bounded topic, readable away from the product. Anchor on a real why question; give design decisions, history, constraints, alternatives. Opinion is allowed here and nowhere else.
+- **Reference** (understanding + work). Describe, only describe. Dry, complete, sure. No instruction, no opinion. Mirror the structure of the thing described. Generate from code where possible.
+- **Explanation** (understanding + learning). One bounded topic, readable away from the product. Anchor on a real why question. Give design decisions, history, constraints, alternatives. Opinion is allowed here and nowhere else.
 
-Don't mix modes; split and link instead.
+Don't mix modes. Split and link instead.
 
 ## Write sentences to the reader (developer style)
 
@@ -33,7 +33,7 @@ Don't mix modes; split and link instead.
 - Put the condition before the instruction: "To delete the document, click Delete."
 - Common case first, exceptions after.
 - No buzzwords, no "please" in instructions, never "simply", "easy", or "quickly" in a procedure.
-- Don't pre-announce, don't start consecutive sentences with the same phrase, read awkward sentences aloud and rewrite.
+- Don't pre-announce, and don't start consecutive sentences with the same phrase.
 - Links say where they go (page title or short description), never "click here".
 - Headings carry the point, not just the topic ("Pick the mode first", not "Modes"), sentence case. Task headings are bare verb phrases; concept headings are noun phrases.
 - Numbered lists for sequences, bullets otherwise, introduced by a complete sentence, items parallel.
@@ -41,31 +41,31 @@ Don't mix modes; split and link instead.
 
 ## Make statements load one at a time (STE)
 
-- One instruction per sentence; one thought per sentence everywhere else.
+- One instruction per sentence. One thought per sentence everywhere else.
 - Split instructions longer than ~20 words, other sentences longer than ~25.
 - Warning or condition before the step it guards.
-- Keep "the" and "a": "Remove backup file" reads two ways; "Remove the backup file" reads one.
+- Keep "the" and "a". "Remove backup file" reads two ways. "Remove the backup file" reads one.
 - One meaning per word, one word per action ("start", not "start" here and "initiate" there).
 - Procedures as direct commands, never narration, never passive.
-- Avoid "-ing" words where you can; they breed misreadings.
+- Avoid "-ing" words where you can. They breed misreadings.
 
 ## Leave no sentence open to two readings (Global English)
 
 - Keep "only" and "not" next to the word they change.
 - Break up long noun strings: "the proto import budget check script" becomes "the script that checks the proto-import budget".
-- Make every "it", "they", "this" point at one obvious thing; repeat the noun when in doubt; never point "this" at a whole clause.
-- Don't drop verbs; give every clause one.
+- Make every "it", "they", "this" point at one obvious thing. Repeat the noun when in doubt. Never point "this" at a whole clause.
+- Don't drop verbs. Give every clause one.
 - Keep the small words that show structure ("Ensure that the switch is off"). Never trade clarity for word count.
 - Repeat the article in a series when it prevents a misread: "the client and the host".
 - Disambiguate "and"/"or" grouping with "both...and", "either...or", "if...then".
 - Periods, not semicolons. A new sentence instead of an em dash.
-- Parentheses hold a full grammatical unit; never form plurals with "(s)"; no slashes ("a, b, or both", not "a/b").
+- Parentheses hold a full grammatical unit. Never form plurals with "(s)". No slashes ("a, b, or both", not "a/b").
 - Call each thing by one name, everywhere. Don't reword unchanged sentences between edits.
 - Skip idioms, Latin abbreviations, and metaphors.
 
 ## Voice
 
-Apply `references/unslop.md` to every doc this file touches; it owns the slop-pattern catalog. Commit messages and PR or MR descriptions are writing too: every layer except Diátaxis applies. Make every count or tree claim true at the commit that lands it, and include the command that regenerates it.
+Apply `references/unslop.md` to every doc this file touches. It owns the slop-pattern catalog. Commit messages and PR or MR descriptions are writing too. Every layer except Diátaxis applies. A PR or MR body is a briefing that a reviewer can read in under a minute. Do not paste worker logs, SHA lists, or metric tables. Link them. Make every count or tree claim true at the commit that lands it, and include the command that regenerates it.
 
 ## Review checklist
 

@@ -9,7 +9,7 @@ Open a todolist with one entry per phase: Frame, Fan out, Aggregate, Report.
 1. State the done predicate and the artifact or report the swarm must return.
 2. Choose the shape: partition into slices, race N workers on identical briefs, or mix. For a race, declare `first pass`, `rank all`, or `best-of` before spawning.
 3. Set N from the user or derive it from the shape. N is total workers, not the concurrency limit.
-4. Pick the worker model: the fast model by default; for a model race, name each arm's model up front.
+4. Pick the worker model: the cheap model by default; for a model race, name each arm's model up front.
 5. Give each worker its own isolated writable output.
 
 ## Phase B: Fan out

@@ -1,35 +1,21 @@
 # Unslop
 
-Edit text to remove AI patterns and add human voice. Applies to every prose surface: replies, docs, commit messages, PR or MR descriptions, and log text.
+Edit text to remove AI patterns. Applies to every prose surface: replies, docs, commit messages, PR or MR descriptions, and log text.
 
 ## Process
 
 1. Scan for the patterns below.
 2. Rewrite. Preserve meaning, match intended tone.
-3. Add soul (next section).
-4. Self-audit: "What makes this obviously AI generated?" Fix remaining tells.
-
-## Adding soul
-
-Removing patterns is half the job. Sterile, voiceless writing is just as obvious.
-
-- **Have opinions.** React to facts instead of neutrally listing pros and cons.
-- **Vary rhythm.** Short sentences. Then longer ones that take their time. Mix it up.
-- **Acknowledge complexity.** "Impressive but also kind of unsettling" beats "impressive."
-- **Use "I" when it fits.** First person isn't unprofessional.
-- **Let some mess in.** Perfect structure looks machine-made.
-- **Be specific.** Not "this is concerning" but "there's something unsettling about agents churning away at 3am."
+3. Self-audit: "What makes this obviously AI generated?" Fix remaining tells.
 
 ## Patterns to detect and fix
 
+Rule numbers are stable ids that other files cite. A removed rule leaves a gap.
+
 ### Content
 
-1. **Puffery.** "pivotal moment", "testament to", "evolving landscape", "setting the stage for". Cut it, state what happened.
-2. **Name-dropping.** Listing sources without context. Pick one, say what was said.
 3. **Superficial -ing phrases.** "highlighting...", "ensuring...", "showcasing...". Delete or expand with real sources.
-4. **Promotional language.** "nestled", "vibrant", "groundbreaking", "renowned", "must-visit". Use neutral descriptions.
 5. **Vague attributions.** "Experts believe", "Industry reports suggest". Name the source or delete.
-6. **Formulaic challenges.** "Despite challenges... continues to thrive." Replace with specific facts.
 
 ### Language
 
@@ -53,7 +39,6 @@ Removing patterns is half the job. Sterile, voiceless writing is just as obvious
 ### Communication artifacts
 
 20. **Chatbot phrases.** "I hope this helps!", "Let me know if...", "Certainly!", "Found the smoking gun!" Remove.
-21. **Cutoff disclaimers.** "While specific details are limited..." Find sources or remove.
 22. **Sycophantic tone.** "Great question! You're absolutely right!" Respond directly.
 
 ### Filler
@@ -72,4 +57,6 @@ Removing patterns is half the job. Sterile, voiceless writing is just as obvious
 28. **Shorten or split dense sentences.** If the reader backtracks to parse it, break it in two. One idea per sentence.
 29. **Active voice.** Catch "is/are/was/were + past participle" and name the actor: "the compiler validates queries". Passive only when the actor is unknown or genuinely doesn't matter.
 30. **Cut adverbs, or use a stronger verb.** "runs quickly" becomes "is fast" or the number. "significantly improves" becomes the measured delta.
-31. **Prefer the plain word.** "utilize" → "use", "leverage" → "use", "facilitate" → "help", "numerous" → "many", "in the event that" → "if".
+31. **Prefer the plain word.** "utilize" becomes "use", "leverage" becomes "use", "facilitate" becomes "help", "numerous" becomes "many", "in the event that" becomes "if". The fancier synonym is rarely clearer.
+32. **Mannered prose.** Metaphor or flourish where a literal phrase exists: aphorisms ("wire it or delete it"), rhetorical fragments for effect, personified code ("the plan holds it"), figurative verbs ("rides along", "stands on"), stock framing phrases. "A dial worth turning" becomes "a parameter worth varying". Say what you mean. Rule 26 covers the metaphor nouns.
+33. **Over-compression.** Dropped articles, verbless fragments, symbol-speak, and abbreviations that make the reader decode instead of read. "Parser rejects bad date → exit 2, no write" becomes "The parser rejects a bad date, exits with code 2, and writes nothing." Write whole sentences with their articles and verbs, and spell out arrows and abbreviations.

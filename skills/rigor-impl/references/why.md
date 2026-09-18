@@ -14,7 +14,7 @@ Recover historical constraints only when they can change the implementation. Use
 
 - Code proves current mechanics, not original intent.
 - A commit, review, issue, document, or comment can prove intent when it states the reason directly.
-- A correlation in logs, errors, or analytics supports a hypothesis; it does not prove the decision unless another source connects them.
+- A correlation in logs, errors, or analytics supports a hypothesis. It does not prove the decision unless another source connects them.
 - Missing evidence means the constraint is unverified. Do not turn an absence into a confident story.
 - Stop when additional history would not change the implementation or its verification plan.
 
