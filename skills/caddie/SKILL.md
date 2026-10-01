@@ -1,7 +1,7 @@
 ---
 name: caddie
 description: Carry a task through the standard implementation round in one go. Understand the brief, raise questions or proceed, open a worktree, implement with fairway, review with review-risk and review-shape, fix with minimal-impl, commit with a message cleaned by unslop. Use when the user hands over a plan, a description, or a research question that should end in a commit without further prompting.
-argument-hint: <what to build: a plan path, a description, or a question to research then implement>
+argument-hint: "<what to build: a plan path, a description, or a question to research then implement>"
 disable-model-invocation: true
 ---
 
