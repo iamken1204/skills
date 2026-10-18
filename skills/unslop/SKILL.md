@@ -14,6 +14,8 @@ AI voice isn't one mistake. It's a register: throat-clearing, then hype, then he
 - One claim per sentence, committed. "May potentially help" is two hedges on a claim you should either make or drop.
 - Plain words carry the confidence. If a noun needs a hype adjective, replace the adjective with the measurement: not "blazingly fast", but "40ms".
 - Cut "simply", "easily", "just", "basically", "please". If it were simple, the sentence wouldn't need to say so.
+- Say it literally. Where a literal phrase exists, a metaphor or flourish is a tell: aphorisms ("wire it or delete it"), personified code ("the plan holds it"), figurative verbs ("rides along", "stands on"). "A dial worth turning" becomes "a parameter worth varying".
+- Write whole sentences. Dropped articles, verbless fragments, arrows, and private abbreviations make the reader decode instead of read. "Parser rejects bad date → exit 2, no write" becomes "The parser rejects a bad date, exits with code 2, and writes nothing."
 
 ## The words
 
@@ -47,4 +49,4 @@ Rewrite until the piece passes all four:
 1. **First sentence test.** Sentence one alone would satisfy a reader who stopped there.
 2. **Word sweep.** Zero hits from the table, zero hype adjectives, zero stacked hedges, zero em dashes.
 3. **Shape.** No bullet wall, no triad chains, no closing summary, headers only past ~300 words.
-4. **Read-aloud.** A paragraph you couldn't say to a colleague across a desk gets rewritten in the words you'd actually say.
+4. **Read-aloud.** A paragraph you couldn't say to a colleague across a desk, fragments and flourishes included, gets rewritten in the words you'd actually say.

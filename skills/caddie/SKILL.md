@@ -7,7 +7,7 @@ disable-model-invocation: true
 
 # Caddie
 
-Carry a brief from reading to commit. You hand over the right skill at each step; this skill adds no rules of its own. Every rule about how to write code, review, or phrase prose lives in the skill it names.
+Carry a brief from reading to commit. You hand over the right skill at each step; this skill adds only the gates between steps. Every rule about how to write code, review, or phrase prose lives in the skill it names.
 
 Sibling skills are invoked through the harness's skill tool. If the harness has none, read `../<name>/SKILL.md` and follow it.
 
@@ -18,6 +18,8 @@ Sibling skills are invoked through the harness's skill tool. If the harness has 
 - A path: read it in full, plus whatever it links to and the code it touches.
 - A description: read the code it touches and the nearby conventions.
 - A research question: investigate until you can state the design in a few lines. Write that design down before step 2; it is the plan from here on.
+
+Then write, in your own words, what the user is after and what problem it solves, in one or two sentences. A brief you cannot restate that way has a question in it.
 
 Then decide:
 
@@ -40,13 +42,17 @@ Branch name comes from the plan's filename or the brief's subject. Base is the c
 
 Invoke `fairway` with the plan as its brief. Finish the whole plan, not the easy parts. Run the project's existing checks before moving on.
 
+Then exercise the changed behavior on the surface its users touch: run the CLI, drive the UI, call the API. Use the project's verification skill if it has one. Passing tests do not count as this check. An inconclusive run, or a run on a different surface, is not a pass. If the surface is out of reach, say so in the reply and mark the change unverified.
+
 ## 4. Review
 
 Invoke `review-risk` and `review-shape` on the worktree's diff against the base. Run them in parallel where the harness allows. Collect findings from both.
 
 ## 5. Fix
 
-For each finding you accept, invoke `minimal-impl` to fix it. Re-run the project's checks.
+For each finding you accept, invoke `minimal-impl` to fix it. Re-run the project's checks, and the step 3 surface check when the fix changes behavior.
+
+When two fixes that share one premise fail the same check, write the premise down and test it directly before writing a third fix on it. If the test contradicts the premise, the cause is elsewhere.
 
 A finding you reject stays in the report with a one-line reason. A high-severity finding you cannot fix stops the round. Report it and leave the worktree uncommitted.
 
@@ -62,7 +68,7 @@ Four lines, then the findings:
 
 - worktree path and branch
 - commit hash and title
-- checks run and their result
+- checks run, the surface exercised, and their results, or "unverified" with the reason
 - findings accepted, rejected, and open, each one line
 
-A round that stopped at step 1 or step 5 says which step and why.
+Every claim says how you know it: measured (you ran it and saw the result), inferred, or guessed. A round that stopped at step 1 or step 5 says which step and why.

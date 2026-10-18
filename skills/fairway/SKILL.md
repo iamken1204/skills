@@ -124,12 +124,21 @@ DO:
 session.promote(message)
 ```
 
+Design for the next contributor, and assume it is an agent that sees only the files it opened, copies the nearest example, and takes the shortest path that compiles. A change that looks right from one file should be right for the whole repo:
+
+- one way to do each task; when you add a new way, move callers off the old one and delete it in the same change, or both keep gaining callers
+- internals stay unreachable from outside the module (package `exports`, `internal/` directories, unexported symbols), so an outside import fails the build instead of quietly widening the interface
+- one list per set of items; derive the other lists from it, or make the build fail when they disagree
+- one writer per piece of state, per the owner rule above; a second module that writes it or keeps its own copy drifts the moment an agent edits only one of them
+
 ## Type-Driven Invariants
 
 - make invalid states unrepresentable where the language can express it
 - parse external, persisted, and network data once at the boundary; internal code receives trusted values and never re-checks raw data
 - use domain types for meaningful IDs, versions, paths, states, and results; no `any`, loose string protocols, or nullable states where a precise type can express the contract
 - enforce invariants in constructors, schemas, and narrow signatures, so illegal combinations cannot be constructed, not merely documented
+- when a schema already owns a shape (the repository's runtime schema library, a protobuf, OpenAPI, or GraphQL schema, a database migration), derive the type from it, e.g. `z.infer<typeof UserSchema>`; do not hand-roll a parallel type plus a property-by-property guard that drifts from it, and do not add a schema dependency for one guard
+- a loose map type (`Record<string, unknown>`, `map[string]any`, a bare `dict`) stops at the parse; past the boundary, data has a named domain type
 - make required state explicit in parameters instead of reading optional ambient state deep in the flow
 
 DON'T validate raw values and throw away what the check proved:
@@ -217,6 +226,8 @@ Add the repository later, when data access becomes a real domain port or hides s
 - prefer one obvious path and one source of truth
 - outside the safety carve-out in Tie-Breakers, require evidence for edge-case handling: explicit requirements, API contracts, failure paths derived from the code, runtime behavior, logs, test reproductions, persisted state, or user reports all count
 - address the supported failure with the smallest fix at the boundary that owns it; do not build a general defense system around one case
+- when fixing a failure, first ask whether the state that triggered it is legitimate. If the system may be in that state, the code that broke on it is the root cause; handle the state there. If the state should never exist, a guard where it surfaced hides the bug; find what produced the state. Guards, retries, swallowed errors, clamped values, and discarded state are the usual ways to hide one
+- a crash or restart partway through a command, lifecycle step, or loop is a failure path derived from the code, not an imagined one. Derive each step from the state that exists, not from what the previous run meant to do: read the current state, compare it to the goal, apply only the difference. Anything a run leaves behind (a lock, a temporary file, a half-written record, a claimed job) must be recognizable as stale by the next run, by evidence that holds wherever the previous run stopped; for example, write to a temporary path and rename it into place
 - never justify complexity with "could", "might", or "what if" alone; state the concrete failure condition and supporting evidence
 - when editing existing code, a safeguard you cannot trace to evidence is a question to raise, not a line to silently delete
 - prefer less code, fewer names, fewer branches, and net-negative diffs when behavior permits
@@ -259,7 +270,12 @@ await sessionStore.append(event)
 
 ## Tests At Stable Boundaries
 
-Tests prove behavior through real boundaries. Do not test one-line helpers, duplicate implementation logic, or build large mock systems for small changes.
+A test claims something about what the code does for its users: a caller, an end user, or another service. Judge each test against two imagined edits:
+
+- **break the behavior**: return a wrong value, skip an effect, or do it twice. If the test still passes, it proves nothing. The usual causes are an assertion looser than the contract, an expected value computed by the code under test, a restated constant that never runs the code that reads it, and an assertion on data the test built itself
+- **change the internals**: keep every observable result and restructure the code underneath. If the test now fails, it is pinned to the implementation; it needs a rewrite on every refactor and still catches no bug
+
+Keep a test that catches the first edit and survives the second; rewrite or delete the rest. Drive the code through its users' interface with a concrete input, derive the expected value from the requirement rather than from a run of the code, and assert what the contract promises, no less and no more. The payload an external service receives is behavior, because that service observes it; a call to an internal helper is not. When the contract is that something does not happen, pair the no-call assertion with a case where it does happen, so the test shows it can see the call. Do not build large mock systems for small changes.
 
 DON'T test the implementation sentence by sentence:
 
@@ -268,7 +284,7 @@ expect(regionFor("eu-1")).toBe("region:eu-1")
 expect(shouldRestart({ available: false })).toBe(true)
 ```
 
-DO test the stable use-case boundary and observable order:
+DO test the stable use-case boundary and the observable order of its effects:
 
 ```ts
 await controller.update("1.2.3")
