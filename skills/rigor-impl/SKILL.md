@@ -12,12 +12,12 @@ rigor-impl is a sticky mode. Once invoked it stays on across turns: apply it whe
 
 rigor-impl runs on any agent harness. Every playbook and reference uses this vocabulary; translate it once here, not per file.
 
-- **Spawn / delegate** — the harness's subagent or task tool, background where offered. No subagent mechanism → run the phases yourself, sequentially, in the prescribed order; the phase separation still applies.
-- **Judgment model / cheap model** — two roles: the strongest reasoning model for design, review, and the hardest changes, whether the intent is vague or the steps are precisely specified; a cheaper, lighter model for mechanical edits and bounded attempts. Cheap means a smaller or lower-priced model, not a speed mode of the same model that bills more for faster output. Single-model harness → same model for both; the role still names the posture.
-- **Different model family** (judges, reviewers, trail audits) — a genuinely different family where available; otherwise a fresh context that sees only the artifact, never the author's conversation. Independence is the point; the family is the means.
-- **Watcher / loop** — the harness's scheduler or loop facility; otherwise keep iterating in-session and re-check on a cadence sized to when the result is worth re-checking.
-- **Control surface** — whatever drives the real artifact: browser automation for UIs, a PTY or script harness for CLIs, a simulator for mobile. No automation for the touched surface → say so plainly; never silently downgrade to "it compiles".
-- **Todolist** — the harness's todo tool; otherwise a written checklist kept at the top of the work.
+- **Spawn / delegate.** The harness's subagent or task tool, background where offered. No subagent mechanism → run the phases yourself, sequentially, in the prescribed order; the phase separation still applies.
+- **Judgment model / cheap model.** Two roles: the strongest reasoning model for design, review, and the hardest changes, whether the intent is vague or the steps are precisely specified; a cheaper, lighter model for mechanical edits and bounded attempts. Cheap means a smaller or lower-priced model, not a speed mode of the same model that bills more for faster output. Single-model harness → same model for both; the role still names the posture.
+- **Different model family** (judges, reviewers, trail audits). A genuinely different family where available; otherwise a fresh context that sees only the artifact, never the author's conversation. Independence is the point; the family is the means.
+- **Watcher / loop.** The harness's scheduler or loop facility; otherwise keep iterating in-session and re-check on a cadence sized to when the result is worth re-checking.
+- **Control surface.** Whatever drives the real artifact: browser automation for UIs, a PTY or script harness for CLIs, a simulator for mobile. No automation for the touched surface → say so plainly; never silently downgrade to "it compiles".
+- **Todolist.** The harness's todo tool; otherwise a written checklist kept at the top of the work.
 
 ## Non-negotiables
 

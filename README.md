@@ -23,20 +23,20 @@ npx skills add iamken1204/skills --skill minimal-impl --yes
 
 ## Skills
 
-- `bun-dig` — dig tool specs, prompts, and implementations out of a Bun-compiled CLI binary and diff them across versions.
-- `caddie` — carry a plan, description, or research question through fairway, review-risk, review-shape, minimal-impl, and unslop to a single commit.
-- `create-verification-skill` — generate a project-local skill that launches your app, drives it the way a user does, and captures proof.
-- `eli30` — catch a grownup up on an unfamiliar topic: narrated walkthrough, then a comic-strip graphic.
-- `fairway` — implement happy-path-first: deep modules, type-driven invariants, evidence-gated complexity.
-- `maintain-verification-skill` — check a verification skill's feature map against source and a live run, then ship one PR of proven fixes.
-- `minimal-impl` — ship the shortest working implementation.
-- `nomen` — create names with multiple meaningful layers.
-- `orchestrate` — split architecture and verification from delegated implementation.
-- `probing` — explain how code works, recover why it exists, and critique its architecture.
-- `restacking` — rebuild a branch's latest state as a clean stack of logically scoped commits.
-- `review-risk` — audit a diff for bugs, breaking changes, and security vulnerabilities.
-- `review-shape` — audit a diff for maintainability: code judo, sprawl, layering leaks.
-- `rigor-impl` — plan, implement, and verify changes with task-specific engineering playbooks.
-- `tw-speak` — write Taiwanese Mandarin that reads human: two-character verbs, named subjects, idioms and 文白夾雜, Taiwan vocabulary.
-- `unsaid` — write strategic-ambiguity copy: definite sentences, referents left unsaid.
-- `unslop` — cure AI-sounding prose: answer first, plain verbs, no hype, no bullet walls.
+- `bun-dig`: dig tool specs, prompts, and implementations out of a Bun-compiled CLI binary and diff them across versions.
+- `caddie`: carry a plan, description, or research question through fairway, review-risk, review-shape, minimal-impl, and unslop to a single commit.
+- `create-verification-skill`: generate a project-local skill that launches your app, drives it the way a user does, and captures proof.
+- `eli30`: catch a grownup up on an unfamiliar topic with a narrated walkthrough, then a comic-strip graphic.
+- `fairway`: implement happy-path-first, with deep modules, type-driven invariants, and evidence-gated complexity.
+- `maintain-verification-skill`: check a verification skill's feature map against source and a live run, then ship one PR of proven fixes.
+- `minimal-impl`: ship the shortest working implementation.
+- `nomen`: create names with multiple meaningful layers.
+- `orchestrate`: split architecture and verification from delegated implementation.
+- `probing`: explain how code works, recover why it exists, and critique its architecture.
+- `restacking`: rebuild a branch's latest state as a clean stack of logically scoped commits.
+- `review-risk`: audit a diff for bugs, breaking changes, and security vulnerabilities.
+- `review-shape`: audit a diff for maintainability (code judo, sprawl, layering leaks).
+- `rigor-impl`: plan, implement, and verify changes with task-specific engineering playbooks.
+- `tw-speak`: write Taiwanese Mandarin that reads human, with two-character verbs, named subjects, idioms and 文白夾雜, and Taiwan vocabulary.
+- `unsaid`: write strategic-ambiguity copy, with definite sentences and referents left unsaid.
+- `unslop`: cure AI-sounding prose with answer-first sentences, plain verbs, no hype, and no bullet walls.
