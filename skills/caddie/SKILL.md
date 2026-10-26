@@ -40,7 +40,7 @@ Branch name comes from the plan's filename or the brief's subject. Base is the c
 
 ## 3. Implement
 
-Invoke `fairway` with the plan as its brief. Finish the whole plan, not the easy parts. Run the project's existing checks before moving on.
+Invoke `fairway` with the plan as its brief. Finish the whole plan, not the easy parts. Run the project's existing checks before moving on, and handle red checks as step 5 describes.
 
 Then exercise the changed behavior on the surface its users touch: run the CLI, drive the UI, call the API. Use the project's verification skill if it has one. Passing tests do not count as this check. An inconclusive run, or a run on a different surface, is not a pass. If the surface is out of reach, say so in the reply and mark the change unverified.
 
@@ -52,7 +52,13 @@ Invoke `review-risk` and `review-shape` on the worktree's diff against the base.
 
 For each finding you accept, invoke `minimal-impl` to fix it. Re-run the project's checks, and the step 3 surface check when the fix changes behavior.
 
+When the full suite is red, run the red tests on the base under the same conditions, such as the same parallelism, before investigating any of them. A test that is red on both was red before you started: list it in the reply and leave it.
+
+When a test passes alone but fails in the full suite, reproduce it by running several copies of it at once, not by re-running the suite. Re-run the full suite after a batch of fixes, not after each one.
+
 When two fixes that share one premise fail the same check, write the premise down and test it directly before writing a third fix on it. If the test contradicts the premise, the cause is elsewhere.
+
+Give an investigation 10 minutes to find its cause, timed from when it starts. When the time runs out, record the failure as open with the hypotheses you ruled out, and move on.
 
 A finding you reject stays in the report with a one-line reason. A high-severity finding you cannot fix stops the round. Report it and leave the worktree uncommitted.
 
