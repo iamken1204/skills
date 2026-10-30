@@ -78,3 +78,4 @@ Four lines, then the findings:
 - findings accepted, rejected, and open, each one line
 
 Every claim says how you know it: measured (you ran it and saw the result), inferred, or guessed. A round that stopped at step 1 or step 5 says which step and why.
+Reply in the language of the brief.
