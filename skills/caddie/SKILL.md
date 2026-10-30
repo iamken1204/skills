@@ -19,7 +19,9 @@ Sibling skills are invoked through the harness's skill tool. If the harness has 
 - A description: read the code it touches and the nearby conventions.
 - A research question: investigate until you can state the design in a few lines. Write that design down before step 2; it is the plan from here on.
 
-Then write, in your own words, what the user is after and what problem it solves, in one or two sentences. A brief you cannot restate that way has a question in it.
+Then write to the user, in your own words, what they are after and what problem it solves, in one or two sentences. A brief you cannot restate that way has a question in it.
+
+Write that restatement in the language of the brief. It sets the language of everything you write to the user from here on: progress notes, questions, and the reply. Code, commit messages, and files follow the project's conventions.
 
 Then decide:
 
@@ -70,7 +72,7 @@ One commit per brief by default. Split only when the brief itself names independ
 
 ## Reply
 
-Four lines, then the findings:
+Four lines, then the findings, in the language step 1 set:
 
 - worktree path and branch
 - commit hash and title
@@ -78,4 +80,3 @@ Four lines, then the findings:
 - findings accepted, rejected, and open, each one line
 
 Every claim says how you know it: measured (you ran it and saw the result), inferred, or guessed. A round that stopped at step 1 or step 5 says which step and why.
-Reply in the language of the brief.
