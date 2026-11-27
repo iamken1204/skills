@@ -26,6 +26,7 @@ npx skills add iamken1204/skills --skill minimal-impl --yes
 - `bun-dig`: dig tool specs, prompts, and implementations out of a Bun-compiled CLI binary and diff them across versions.
 - `caddie`: carry a plan, description, or research question through fairway, review-risk, review-shape, minimal-impl, and unslop to a single commit.
 - `create-verification-skill`: generate a project-local skill that launches your app, drives it the way a user does, and captures proof.
+- `diagram-page`: build a bilingual (English / 繁體中文) page around one deployment or architecture diagram, with a component kit and a Chromium layout checker.
 - `eli30`: catch a grownup up on an unfamiliar topic with a narrated walkthrough, then a comic-strip graphic.
 - `fairway`: implement happy-path-first, with deep modules, type-driven invariants, and evidence-gated complexity.
 - `maintain-verification-skill`: check a verification skill's feature map against source and a live run, then ship one PR of proven fixes.
